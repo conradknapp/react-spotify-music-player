@@ -18,6 +18,10 @@ class Search extends Component {
     this.setState({ loading: true });
     axios
       .get(spotifySearchUrl, {
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        },
         params: {
           q: this.query.value,
           type: 'artist'

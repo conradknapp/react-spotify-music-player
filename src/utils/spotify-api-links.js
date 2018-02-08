@@ -1,6 +1,6 @@
 const BASE_URL = `https://accounts.spotify.com/authorize`;
 const CLIENT_ID = `8f410684b7f04b249085e71fee297086`;
-const REDIRECT_URI = `http://localhost:3001/authorized`;
+const REDIRECT_URI = `http://localhost:3000/authorized`;
 
 // used to get access token to make get requests to Spotify API
 export const spotifyAuthUrl = `${BASE_URL}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=token`;

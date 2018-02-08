@@ -1,13 +1,13 @@
 import React from 'react';
 import { spotifyAuthUrl } from './utils/spotify-api-links';
 
-const SignIn = ({ userAuthorized }) => {
+const SignIn = ({ user, logOutUser }) => {
   return (
     <button>
-      {!userAuthorized ? (
+      {!user ? (
         <a href={spotifyAuthUrl}>Sign in with Spotify</a>
       ) : (
-        'You are logged in'
+        <p onClick={logOutUser}>Log Out</p>
       )}
     </button>
   );
