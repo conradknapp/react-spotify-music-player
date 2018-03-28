@@ -2,18 +2,15 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { spotifySearchUrl } from './utils/spotify-api-links';
 
-class Search extends Component {
-  constructor(props) {
-    super(props);
+import ArtistResults from './ArtistResults';
 
-    this.state = {
-      loading: null
-    };
+class SearchArtists extends Component {
+  state = {
+    loading: false,
+    results: null
+  };
 
-    this.onSearchSubmit = this.onSearchSubmit.bind(this);
-  }
-
-  onSearchSubmit(event) {
+  onSearchSubmit = event => {
     event.preventDefault();
     this.setState({ loading: true });
     axios
@@ -27,11 +24,13 @@ class Search extends Component {
           type: 'artist'
         }
       })
-      .then(res => console.log(res.data))
-      .catch(err => console.error(err))
+      .then(res => {
+        this.setState({ results: res.data });
+      })
+      .catch(err => console.warn(err))
       .finally(() => this.setState({ loading: false }));
     this.searchForm.reset();
-  }
+  };
 
   render() {
     return (
@@ -43,12 +42,12 @@ class Search extends Component {
           <h2>Search Artists</h2>
           <input type="text" ref={input => (this.query = input)} />
           <button type="submit">Submit</button>
-          {/* swap out loading div with spinner component */}
           {this.state.loading && <div>Loading</div>}
+          <ArtistResults results={this.state.results} />
         </form>
       </section>
     );
   }
 }
 
-export default Search;
+export default SearchArtists;

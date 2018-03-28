@@ -1,19 +1,22 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import App from './App';
-import Search from './Search';
+import SearchArtists from './SearchArtists';
+import SearchTracks from './SearchTracks';
 
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 
 const Root = () => (
   <Router>
-    <div>
+    <Switch>
+      <Route path="/search/artists" component={SearchArtists} />
+      <Route path="/search/tracks" component={SearchTracks} />
+      <Route path="/authorized" component={SearchArtists} />
       <Route path="/" component={App} />
-      <Route exact path="/search" component={Search} />
-    </div>
+    </Switch>
   </Router>
 );
 
